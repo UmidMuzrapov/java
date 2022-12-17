@@ -1,0 +1,12 @@
+---
+:id: 135783724
+:submitters:
+- :name: Umidjon Muzrapov
+  :email: umidmuzrapov@arizona.edu
+:created_at: !ruby/object:ActiveSupport::TimeWithZone
+  utc: 2022-09-23 05:18:45.525340000 Z
+  zone: !ruby/object:ActiveSupport::TimeZone
+    name: America/Los_Angeles
+  time: 2022-09-22 22:18:45.525340000 Z
+:status: processed
+:score: 100.0
