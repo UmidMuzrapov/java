@@ -25,7 +25,6 @@ jobs:
 
     - name: Lint Java code
       run: |
-        checkstyle --help
         java -jar checkstyle.jar -c sun_checks.xml *.java
 
     - name: Commit changes (if any)
