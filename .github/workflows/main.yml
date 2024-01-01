@@ -24,7 +24,7 @@ jobs:
         wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45/checkstyle-8.45-all.jar -O checkstyle.jar
 
     - name: Lint Java code
-      run: java -jar checkstyle.jar -c sun_checks.xml -R .
+      run: java -jar checkstyle.jar -c sun_checks.xml
 
     - name: Commit changes (if any)
       run: |
