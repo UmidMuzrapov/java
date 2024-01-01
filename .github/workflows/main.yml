@@ -17,13 +17,25 @@ jobs:
     - name: Install build tools
       run: |
         sudo apt-get update
-        sudo apt-get install -y default-jdk maven
+        sudo apt-get install -y default-jdk
+
+    - name: Install Checkstyle
+      run: |
+        wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45/checkstyle-8.45-all.jar
+        echo 'alias checkstyle="java -jar $(pwd)/checkstyle-8.45-all.jar -c sun_checks.xml -r ."' >> $HOME/.bashrc
+        source $HOME/.bashrc
+
+    - name: Install Google Java Format
+      run: |
+        wget https://github.com/google/google-java-format/releases/download/google-java-format-1.11.0/google-java-format-1.11.0-all-deps.jar
+        echo 'alias format="java -jar $(pwd)/google-java-format-1.11.0-all-deps.jar --replace --set-exit-if-changed"' >> $HOME/.bashrc
+        source $HOME/.bashrc
 
     - name: Lint Java code
-      run: mvn checkstyle:check
+      run: checkstyle
 
     - name: Format Java code
-      run: mvn com.google.cloud.tools:jib-maven-plugin:build-format
+      run: format .
 
     - name: Commit changes (if any)
       run: |
