@@ -25,7 +25,8 @@ jobs:
       
     - name: Lint Java code
       run: |
-        java com.puppycrawl.tools.checkstyle.Main -c /sun_checks.xml ./
+        ls -R . | grep '\.java$' | java -jar checkstyle.jar -c sun_checks.xml
+        
     - name: Commit changes (if any)
       run: |
         git diff --exit-code || (git config --global user.email "github-actions@github.com" && git config --global user.name "GitHub Actions" && git commit -am "Auto-format code" && git push)
