@@ -25,7 +25,7 @@ jobs:
       
     - name: Lint Java code
       run: |
-        java -jar checkstyle-10.12.7-all.jar -c /sun_checks.xml | ls -R /path/to/your/directory | grep '\.java$'
+        java -jar checkstyle-10.12.7-all.jar -c /sun_checks.xml | ls -R . | grep '\.java$'
 
     - name: Commit changes (if any)
       run: |
