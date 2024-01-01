@@ -6,7 +6,7 @@ on:
       - main  # Adjust the branch as needed
 
 jobs:
-  lint_and_format:
+  linting:
 
     runs-on: ubuntu-latest
 
@@ -24,19 +24,20 @@ jobs:
         wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45/checkstyle-8.45-all.jar
         echo 'alias checkstyle="java -jar $(pwd)/checkstyle-8.45-all.jar -c sun_checks.xml -r ."' >> $HOME/.bashrc
         source $HOME/.bashrc
-
-    - name: Install Google Java Format
-      run: |
-        wget https://github.com/google/google-java-format/releases/download/google-java-format-1.11.0/google-java-format-1.11.0-all-deps.jar
-        echo 'alias format="java -jar $(pwd)/google-java-format-1.11.0-all-deps.jar --replace --set-exit-if-changed"' >> $HOME/.bashrc
-        source $HOME/.bashrc
-
+        
     - name: Lint Java code
       run: checkstyle
-
-    - name: Format Java code
-      run: format .
 
     - name: Commit changes (if any)
       run: |
         git diff --exit-code || (git config --global user.email "github-actions@github.com" && git config --global user.name "GitHub Actions" && git commit -am "Auto-format code" && git push)
+  
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--skip-sorting-imports --replace"
+          # Recommended if you use MacOS:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
