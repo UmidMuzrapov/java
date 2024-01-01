@@ -3,7 +3,6 @@
  */
 package model;
 
-
 import controller_view.JukeboxGUI;
 
 import java.io.File;
