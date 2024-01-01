@@ -22,11 +22,10 @@ jobs:
     - name: Install Checkstyle
       run: |
         wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45/checkstyle-8.45-all.jar -O checkstyle.jar
-    - name:
-      run: checkstyle --help
       
     - name: Lint Java code
-      run: checkstyle
+      run: |
+        java -jar checkstyle-10.12.7-all.jar -c /sun_checks.xml | ls -R /path/to/your/directory | grep '\.java$'
 
     - name: Commit changes (if any)
       run: |
